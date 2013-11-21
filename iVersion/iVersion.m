@@ -237,7 +237,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
 
 - (NSString *)ignoreButtonLabel
 {
-    return _ignoreButtonLabel ?: [self localizedStringForKey:iVersionIgnoreButtonKey withDefault:@"Ignore"];
+    return nil;
 }
 
 - (NSString *)downloadButtonLabel
@@ -1140,19 +1140,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
         //record that details have been viewed
         self.viewedVersionDetails = YES;
     }
-    else if (buttonIndex == alertView.cancelButtonIndex)
-    {
-        //ignore this version
-        self.ignoredVersion = latestVersion;
-        self.lastReminded = nil;
-        
-        //log event
-        if ([self.delegate respondsToSelector:@selector(iVersionUserDidIgnoreUpdate:)])
-        {
-            [self.delegate iVersionUserDidIgnoreUpdate:latestVersion];
-        }
-    }
-    else if (buttonIndex == 2)
+    else if (buttonIndex == 1)
     {
         //remind later
         self.lastReminded = [NSDate date];
